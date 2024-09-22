@@ -35,3 +35,33 @@ class HTMLNode:
         htmlnode_repr_result += ", ".join(htmlnode_repr_values)
         htmlnode_repr_result += ")"
         return htmlnode_repr_result
+    
+class LeafNode(HTMLNode):
+    def __init__(self, tag, value, props=None):
+        super().__init__(tag, value, None, props)
+
+    def to_html(self):
+        if self.value is None:
+            raise ValueError("Invalid HTML: no value")
+        if self.tag is None:
+            return self.value
+        
+        props_value = self.props_to_html()
+
+        return f"<{self.tag}{props_value}>{self.value}</{self.tag}>"
+    
+class ParentNode(HTMLNode):
+    def __init__(self, tag, children, props=None):
+        super().__init__(tag, None, children, props)
+
+    def to_html(self):
+        if self.tag is None:
+            raise ValueError("Invalid HTML: tag is mandatory")
+        if self.children is None:
+            raise ValueError("Invalid HTML: children are mandatory")
+        children_html = []
+        for child in self.children:
+            children_html.append(child.to_html())
+
+        children_value =  "".join(children_html)
+        return f"<{self.tag}{self.props_to_html()}>{children_value}</{self.tag}>"
