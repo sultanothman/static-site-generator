@@ -1,7 +1,10 @@
 from textnode import TextNode
+from inline_makrdown import *
 
 def main():
-    node = TextNode("This is a text node", "bold", "https://www.boot.dev")
-    print(node)
+    text = "This is **text** with an "
+    print(text_to_textnodes(text))
+
+    
 
 main()
