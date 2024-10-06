@@ -1,4 +1,5 @@
 import re
+from textnode import *
 
 block_type_heading = "heading"
 block_type_code = "code"
@@ -42,3 +43,5 @@ def block_to_block_type(block):
                 return block_type_paragraph
         return block_type_olist
     return block_type_paragraph
+
+
