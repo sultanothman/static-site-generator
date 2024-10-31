@@ -201,16 +201,6 @@ def check_for_links_occurrences(nodes):
             return True
 
     return False
-
-def extract_title(markdown):    
-    lines = markdown.splitlines()
-    if lines:
-        first_row = lines[0]
-        match = re.match(r'^#\s+', first_row)
-        if match:
-            return first_row.replace("#", "").strip()
-    
-    raise Exception("markdown does not contain H1 header")
     
     
     
